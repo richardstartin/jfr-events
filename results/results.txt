@@ -1,0 +1,18 @@
+branch
+Benchmark                                     (idGenerator)   (n)  (seed)  Mode  Cnt    Score   Error  Units
+CommitEventBenchmark.emptyEvent              UNIFORM_RANDOM  5000       0  avgt   15  165.309 ± 1.780  us/op
+CommitEventBenchmark.emptyEvent                  SEQUENTIAL  5000       0  avgt   15  166.007 ± 0.875  us/op
+CommitEventBenchmark.oneCorrelationIdEvent   UNIFORM_RANDOM  5000       0  avgt   15  262.557 ± 3.116  us/op
+CommitEventBenchmark.oneCorrelationIdEvent       SEQUENTIAL  5000       0  avgt   15  192.408 ± 1.144  us/op
+CommitEventBenchmark.twoCorrelationIdsEvent  UNIFORM_RANDOM  5000       0  avgt   15  329.306 ± 3.513  us/op
+CommitEventBenchmark.twoCorrelationIdsEvent      SEQUENTIAL  5000       0  avgt   15  224.940 ± 3.921  us/op
+
+
+master
+Benchmark                                     (idGenerator)   (n)  (seed)  Mode  Cnt    Score    Error  Units
+CommitEventBenchmark.emptyEvent              UNIFORM_RANDOM  5000       0  avgt   15  161.526 ±  1.286  us/op
+CommitEventBenchmark.emptyEvent                  SEQUENTIAL  5000       0  avgt   15  161.670 ±  0.266  us/op
+CommitEventBenchmark.oneCorrelationIdEvent   UNIFORM_RANDOM  5000       0  avgt   15  287.749 ± 11.629  us/op
+CommitEventBenchmark.oneCorrelationIdEvent       SEQUENTIAL  5000       0  avgt   15  203.213 ±  1.873  us/op
+CommitEventBenchmark.twoCorrelationIdsEvent  UNIFORM_RANDOM  5000       0  avgt   15  393.814 ±  7.084  us/op
+CommitEventBenchmark.twoCorrelationIdsEvent      SEQUENTIAL  5000       0  avgt   15  247.528 ±  2.068  us/op
