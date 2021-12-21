@@ -2,9 +2,11 @@ package io.github.richardstartin.jfrevents;
 
 import jdk.jfr.Recording;
 import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.Arrays;
 import java.util.SplittableRandom;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
@@ -95,9 +97,16 @@ public class CommitEventBenchmark {
   }
 
   @Benchmark
-  public void uuidCorrelationIdEvent() {
-    for (int i = 0; i < n; i++) {
-      new UUIDCorrelationIdEvent(ids[i]).commit();
+  public void uuidCorrelationIdEvent(Blackhole bh) {
+    if (idGenerator == IdGenerator.SEQUENTIAL) {
+      for (int i = 0; i < n; i++) {
+        bh.consume(ThreadLocalRandom.current().nextLong());
+        new UUIDCorrelationIdEvent(i).commit();
+      }
+    } else {
+      for (int i = 0; i < n; i++) {
+        new UUIDCorrelationIdEvent(ThreadLocalRandom.current().nextLong()).commit();
+      }
     }
   }
 }
