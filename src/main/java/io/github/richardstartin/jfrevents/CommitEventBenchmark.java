@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @Measurement(iterations = 5, time = 1)
 @Warmup(iterations = 5, time = 1)
-@Fork(value = 3, jvmArgsAppend = {"-Xms2g", "-Xmx2g", "-XX:+AlwaysPreTouch"})
+@Fork(value = 3, jvmArgsAppend = {"-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch", "-XX:+UseSerialGC"})
 @State(Scope.Benchmark)
 public class CommitEventBenchmark {
 
@@ -84,6 +84,20 @@ public class CommitEventBenchmark {
   public void twoCorrelationIdsEvent() {
     for (int i = 0; i < n; i++) {
       new TwoCorrelationIdsEvent(ids[i], ids[i]).commit();
+    }
+  }
+
+  @Benchmark
+  public void twoDoubleCorrelationIdsEvent() {
+    for (int i = 0; i < n; i++) {
+      new TwoDoubleCorrelationIdsEvent(ids[i], ids[i]).commit();
+    }
+  }
+
+  @Benchmark
+  public void uuidCorrelationIdEvent() {
+    for (int i = 0; i < n; i++) {
+      new UUIDCorrelationIdEvent(ids[i]).commit();
     }
   }
 }
